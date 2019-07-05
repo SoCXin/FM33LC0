@@ -18,13 +18,13 @@
 
 ### [收录型号](https://github.com/sochub/STM32F1)
 
-* [STM32F030](https://github.com/sochub/STM32F030)
-* [STM32F051](https://github.com/sochub/STM32F051)
-* [STM32F072](https://github.com/sochub/STM32F072)
+* [STM32F103](https://github.com/sochub/STM32F103)
+* [STM32F105](https://github.com/sochub/STM32F105)
+* [STM32F107](https://github.com/sochub/STM32F107)
 
 ### [选型建议](https://github.com/sochub)
 
-[STM32F1](https://github.com/sochub/STM32F1)系列是ST单片机的市场主流。
+[STM32F1](https://github.com/sochub/STM32F1)系列是ST单片机的市场主流产品，拥有大量的开发资源可供参考，可拿货价格也相对实惠。
 
 
 
