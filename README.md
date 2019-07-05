@@ -10,22 +10,22 @@
 
 [![sites](docs/STM32F1.jpg)](https://github.com/sochub/STM32F1)
 
-## [组成](SoC/) 
 
-#### [文档资料](docs/)
+### [资源收录](https://github.com/sochub/STM32F1)
 
-参考设计和数据手册
+* [文档](docs/)
+* [资源](src/)
 
-#### [项目文件](project/)
+### [收录型号](https://github.com/sochub/STM32F1)
 
-包括各种开发资源和工程
+* [STM32F030](https://github.com/sochub/STM32F030)
+* [STM32F051](https://github.com/sochub/STM32F051)
+* [STM32F072](https://github.com/sochub/STM32F072)
+
+### [选型建议](https://github.com/sochub)
+
+[STM32F1](https://github.com/sochub/STM32F1)系列是ST单片机的市场主流。
 
 
-##### [相似产品](https://github.com/sochub/GD32)
 
-
----
-
-###  [SoC开发平台](http://www.qitas.cn)   
-
-###  qitas@qitas.cn
+###  [SoC资源平台](http://www.qitas.cn)
