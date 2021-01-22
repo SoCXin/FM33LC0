@@ -1,21 +1,21 @@
 {
     "type":"MCU",
     "name":"FM33LC0",
-    "series":["FM33LC0"],
+    "series":["FM33LC022","FM33LC023","FM33LC025","FM33LC026"],
     "price":[4,6],
-    "description":"WCH Cortex M3 MCU",
+    "description":"WCH Cortex M0 MCU",
     "peripheral": ["TIM","ADC","USB","UART","SPI","LDO","PWM"],
-    "package":["LQFP64","LQFP48","QFN48"],
+    "package":["LQFP64","LQFP48","QFN32","TSSOP20"],
     "manufacturer": {
-        "vendor":"WCH",
-        "homepage": "http://www.wch.cn/products/CH554.html"
+        "vendor":"FM",
+        "homepage": "http://www.fmsh.com/"
     },
     "url":"http://www.SoC.xin/FM33LC0",
     "repo":"https://github.com/SoCXin/FM33LC0",
     "version":"1.0.0",
     "Core": {
         "num": 1,
-        "architecture":"Cortex M3",
+        "architecture":"Cortex M0",
         "Freq":[8,24]
     },
     "UART": {
@@ -48,7 +48,7 @@
     "USB": {
         "num": 1,
         "FIFO": 64,
-        "more":["FS","type-C","Host","Device"]
+        "more":["FS","Host","Device"]
     },
     "PWR": {
         "VDD": [2800,5000],
