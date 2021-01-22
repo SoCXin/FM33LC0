@@ -69,6 +69,8 @@
   #include "fm33l0xx.h"
 #elif defined(FM33LC0XX)
   #include "fm33lc0xx.h"
+#elif defined(FM33LG0XX)
+  #include "fm33lg0xx.h"
 #else
  #error "Please select first the target FM33x0xx device used in your application (in FM33xxx.h file)"
 #endif

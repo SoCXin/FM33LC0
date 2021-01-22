@@ -1,9 +1,32 @@
 #include "main.h"
 #include "user_init.h"
-#include "flash.h"
 
 #define LENGTH  256
 uint8_t fBuff[LENGTH];
+
+extern ErrorStatus FL_FLASH_Write_Dma(FLASH_Type* FLASHx, uint32_t address, uint32_t *data);
+extern ErrorStatus FL_FLASH_Read_Dma(FLASH_Type* FLASHx, uint32_t address, uint32_t *data, uint16_t length);
+
+void FlashTest(void)
+{
+    FL_FLASH_PageErase(FLASH, 0x00004000);
+    memset(fBuff, 0x00, LENGTH);
+    FL_FLASH_Read_Dma(FLASH, 0x00004000, (uint32_t *)fBuff, LENGTH/4);
+    memset(fBuff, 0x55, LENGTH);
+    FL_FLASH_Write_Dma(FLASH, 0x00004000, (uint32_t *)fBuff);
+    memset(fBuff, 0x00, LENGTH);
+    FL_FLASH_Read_Dma(FLASH, 0x00004000, (uint32_t *)fBuff, LENGTH/4);
+    
+    FL_FLASH_PageErase(FLASH, 0x00004000);
+    memset(fBuff, 0x00, LENGTH);
+    FL_FLASH_Read_Dma(FLASH, 0x00004000, (uint32_t *)fBuff, LENGTH/4);
+    memset(fBuff, 0xAA, LENGTH);
+    FL_FLASH_Write_Dma(FLASH, 0x00004000, (uint32_t *)fBuff);
+    memset(fBuff, 0x00, LENGTH);
+    FL_FLASH_Read_Dma(FLASH, 0x00004000, (uint32_t *)fBuff, LENGTH/4);
+    
+    FL_FLASH_PageErase(FLASH, 0x00004000);
+}
 
 int main(void)
 {
@@ -21,23 +44,7 @@ int main(void)
     
     UserInit();
     
-    LL_FLASH_PageErase(FLASH, 0x10000);
-    memset(fBuff, 0x00, LENGTH);
-    FlashReadDma(0x10000, fBuff, LENGTH);
-    memset(fBuff, 0x55, LENGTH);
-    FlashWriteDma(0x10000, fBuff);
-    memset(fBuff, 0x00, LENGTH);
-    FlashReadDma(0x10000, fBuff, LENGTH);
-    
-    LL_FLASH_PageErase(FLASH, 0x10000);
-    memset(fBuff, 0x00, LENGTH);
-    FlashReadDma(0x10000, fBuff, LENGTH);
-    memset(fBuff, 0xAA, LENGTH);
-    FlashWriteDma(0x10000, fBuff);
-    memset(fBuff, 0x00, LENGTH);
-    FlashReadDma(0x10000, fBuff, LENGTH);
-    
-    LL_FLASH_PageErase(FLASH, 0x10000);
+    FlashTest();
     
     while(1)
     {     

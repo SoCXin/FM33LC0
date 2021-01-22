@@ -6,13 +6,15 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 FMSH.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by FMSH under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * Copyright (c) [2019] [Fudan Microelectronics]
+  * THIS SOFTWARE is licensed under the Mulan PSL v1.
+  * can use this software according to the terms and conditions of the Mulan PSL v1.
+  * You may obtain a copy of Mulan PSL v1 at:
+  * http://license.coscl.org.cn/MulanPSL
+  * THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+  * IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+  * PURPOSE.
+  * See the Mulan PSL v1 for more details.
   *
   ******************************************************************************
   */
@@ -23,6 +25,52 @@
 
 /* Private function prototypes -----------------------------------------------*/
 
+ 
+/**
+  * @brief  ATIM_TimerBase Initialization function
+  * @param  void
+  * @retval None
+  */
+void MF_ATIM_TimerBase_Init(void)
+{
+
+    /*IO CONFIG*/
+    FL_ATIM_InitTypeDef    TimerBaseInitStruct;
+
+    TimerBaseInitStruct.clockSource = FL_RCC_ATIM_CLK_SOURCE_APB2CLK;
+    TimerBaseInitStruct.prescaler = (uint16_t)0x0009;
+    TimerBaseInitStruct.counterMode = FL_ATIM_COUNTER_DIR_UP;
+    TimerBaseInitStruct.autoReload = 0xFFFFU;
+    TimerBaseInitStruct.autoReloadState = DISABLE;
+    TimerBaseInitStruct.clockDivision = FL_ATIM_CLK_DIVISION_DIV1;
+    TimerBaseInitStruct.repetitionCounter = 0;
+
+    FL_ATIM_Init(ATIM,&TimerBaseInitStruct );
+
+
+    FL_ATIM_EnableIT_Update(ATIM );
+
+    
+}
+ 
+/**
+  * @brief  NVIC Initialization function
+  * @param  void
+  * @retval None
+  */
+void MF_NVIC_Init(void)
+{
+
+
+    NVIC_ConfigTypeDef    InterruptConfigStruct;
+
+    InterruptConfigStruct.preemptPriority = 0x00;
+    NVIC_Init(&InterruptConfigStruct,ATIM_IRQn );
+
+    
+}
+
+
 /**
   * @brief  The application entry point.
   * @retval int
@@ -30,15 +78,13 @@
 void MF_Clock_Init(void)
 {
   /* MCU Configuration--------------------------------------------------------*/
-   LL_RCC_Group1_EnableBusClock(LL_RCC_BUS1_CLOCK_RTC);
-   LL_RTC_SetAdjustVel(RTC,0);
-   LL_RCC_Group1_DisableBusClock(LL_RCC_BUS1_CLOCK_RTC);
+
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
   /* System interrupt init*/
 
   /* Initialize all configured peripherals */
-  LL_GPIO_ALLPIN_LPM_MODE();
+ 
 }
 
 /**
@@ -47,12 +93,15 @@ void MF_Clock_Init(void)
   */
 void MF_SystemClock_Config(void)
 {
-    
+ 
 }
 
 void MF_Config_Init(void)
 {
-    
+    /*FUNCTION CALL*/
+     MF_ATIM_TimerBase_Init();
+     MF_NVIC_Init();
+
 }
 
 

@@ -20,7 +20,7 @@
   */
 #ifndef __FM33_ASSERT_H
 #define __FM33_ASSERT_H
-
+#include "fm33xx.h"
 #ifdef __cplusplus
  extern "C" {
 #endif

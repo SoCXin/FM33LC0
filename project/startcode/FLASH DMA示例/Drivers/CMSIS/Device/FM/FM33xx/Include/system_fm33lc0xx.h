@@ -84,6 +84,21 @@ extern "C" {
 #endif /* XTLF_VALUE */         
 
 
+#define LDT_CHECK(_N_VALUE_, _T_VALUE_)                         \
+                            ((((_N_VALUE_ >> 16) & 0xffff) ==   \
+                            ((~_N_VALUE_) & 0xffff)) ? _N_VALUE_ : _T_VALUE_)
+
+#define LPOSC_LDT_TRIM      (*(uint32_t *)0x1FFFFB20)   // LPOSC 常温校准值
+#define RCHF8M_LDT_TRIM     (*(uint32_t *)0x1FFFFB40)	// RC8M 常温校准值
+#define RCHF16M_LDT_TRIM 	(*(uint32_t *)0x1FFFFB3C)	// RC16M 常温校准值
+#define RCHF24M_LDT_TRIM 	(*(uint32_t *)0x1FFFFB38)	// RC24M 常温校准值
+#define RCMF4M_LDT_TRIM     (*(uint32_t *)0x1FFFFB44)   // RCMF 常温校准值
+
+#define LPOSC_TRIM          (LDT_CHECK(LPOSC_LDT_TRIM, 0x80) & 0xff)
+#define RCMF4M_TRIM         (LDT_CHECK(RCMF4M_LDT_TRIM, 0x41) & 0x7f)
+#define RCHF8M_TRIM         (LDT_CHECK(RCHF8M_LDT_TRIM, 0x30) & 0x7f)
+#define RCHF16M_TRIM        (LDT_CHECK(RCHF16M_LDT_TRIM, 0x2A) & 0x7f)
+#define RCHF24M_TRIM        (LDT_CHECK(RCHF24M_LDT_TRIM, 0x27) & 0x7f)
          
 
 #define __SYSTEM_CLOCK          (8000000)
@@ -99,6 +114,17 @@ extern "C" {
                       
 #define While_DelayUsEnd(Count) }while(((LastTick - SysTick->VAL)&0xFFFFFF)<DELAY_US*Count); \
 }            
+
+/**
+  * @brief LL NVIC Init Sturcture definition
+  */
+typedef  struct
+{
+    /* 中断抢占优先级 */
+    uint32_t preemptPriority;
+    
+}NVIC_ConfigTypeDef;
+
 
 /**
  * Initialize the system
@@ -121,7 +147,16 @@ void SystemInit (void);
  *         retrieved from cpu registers.
  */
 void SystemCoreClockUpdate (void);
-
+/**
+  * @brief	NVIC_Init config NVIC
+  *
+  * @param 	NVIC_configStruct configParams
+  *
+  * @param 	IRQn Interrupt number
+  *
+  * @retval	None
+  */
+void NVIC_Init(NVIC_ConfigTypeDef  *NVIC_configStruct,IRQn_Type IRQn);
 
 #ifdef __cplusplus
 }

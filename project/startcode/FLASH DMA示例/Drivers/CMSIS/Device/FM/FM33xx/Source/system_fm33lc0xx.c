@@ -64,6 +64,29 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 
 }
 /**
+  * @brief	NVIC_Init config NVIC
+  *
+  * @param 	NVIC_configStruct configParams
+  *
+  * @param 	IRQn Interrupt number
+  *
+  * @retval	None
+  */
+void NVIC_Init(NVIC_ConfigTypeDef  *NVIC_configStruct,IRQn_Type IRQn)
+{
+
+    /* Params Check */
+    if(NVIC_configStruct->preemptPriority>3)
+    {
+        NVIC_configStruct->preemptPriority = 3;
+    }
+	NVIC_DisableIRQ(IRQn);
+	NVIC_SetPriority(IRQn,NVIC_configStruct->preemptPriority);
+	NVIC_EnableIRQ(IRQn);
+
+}
+
+/**
  * Initialize the system
  *
  * @param  none
@@ -75,18 +98,7 @@ void SystemCoreClockUpdate (void)            /* Get Core Clock Frequency      */
 void SystemInit (void)
 {
     uint32_t temp;
-    /*trim*/ 
-    temp = *(uint32_t*)(0x1FFFFB40U);
-   
-    if(!((temp>>16)&temp))
-    {
-        RCC->RCHFTR = (0x7F&temp);
-    }
-    temp = *(uint32_t*)(0x1FFFFB44U);
-    if((((temp>>16)^temp)&0xFF) == 0xFF)
-    {
-        RCC->RCMFTR = (0x7F&temp);
-    }
+    
     /*  */
     RCC->PLLCR = (uint32_t)0x00000000U;
     RCC->SYSCLKCR = (uint32_t)0x0A000000U;
@@ -115,6 +127,16 @@ void SystemInit (void)
     /* DEBUG IWDT WWDT */
     DBG->CR =0x03;
     
+    RCC->RCHFTR = RCHF8M_TRIM;
+    RCC->RCMFTR = RCMF4M_TRIM;
+    RCC->LPOSCTR = LPOSC_TRIM;
+    
+    GPIOD->PUEN |= 0x3 << 7;
+    
+    /* DMA Flash Channel: Flash->RAM */
+    RCC->PCLKCR2 |= 0x1 << 4;
+    DMA->CH7CR |= 0x1 << 10;
+    RCC->PCLKCR2 &= ~(0x1 << 4);
 } 
 
 
