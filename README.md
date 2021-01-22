@@ -8,16 +8,16 @@
 
 ## [描述](https://github.com/SoCXin/FM33LC0/wiki)
 
-[FM33LC0](https://github.com/SoCXin/FM33LC0)基于ARM Cortex-M0内核，集成大容量嵌入式闪存，具备丰富的模
-拟和数字外设，并具有优异的低功耗特性。FM33LC0xxx系列包含两个子系列，分别为支持无晶振USB FS device的FM33LC0xxU系列，和不支持USB的FM33LC0xxN系列(1.8V~3.6V)，以及FM33LC0x4NR系列(1.8V~5.5V)。
-
+[FM33LC0](https://github.com/SoCXin/FM33LC0) 基于Cortex-M0内核，集成128K-256K Flash，24K RAM，具备丰富的模拟和数字外设，并具有优异的低功耗特性。FM33LC0xxx系列包含两个子系列，分别为支持无晶振USB FS device的FM33LC0xxU系列，不支持USB的 FM33LC0xxN(1.8V-3.6V)/FM33LC0x4NR(1.8V-5.5V)。
 
 [![sites](docs/FM33LC0.png)](https://github.com/SoCXin/FM33LC0)
 
 ##### 关键特性
 
-* 支持无晶振USB FS device
-
+* 支持无晶振USB FS(1.1) device
+* 2xOPA
+* 12bit SAR-ADC
+* 2xLPUART + 2xUART
 
 ### [资源收录](https://github.com/SoCXin/FM33LC0)
 

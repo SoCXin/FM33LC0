@@ -5,7 +5,7 @@
     "price":[4,6],
     "description":"WCH Cortex M0 MCU",
     "peripheral": ["TIM","ADC","USB","UART","SPI","LDO","PWM"],
-    "package":["LQFP64","LQFP48","QFN32","TSSOP20"],
+    "package":["LQFP64","LQFP48","QFN32"],
     "manufacturer": {
         "vendor":"FM",
         "homepage": "http://www.fmsh.com/"
