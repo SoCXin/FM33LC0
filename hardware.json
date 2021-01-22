@@ -1,0 +1,20 @@
+{
+    "type":"MCU",
+    "name":"FM33LC0",
+    "package":["LQFP64","LQFP48","QFN48"],
+    "LQFP64": {
+        "name":"FM33LC0R8T6",
+        "peripheral": ["ADC","TIM","UART1","UART2","I2C","SPI","PWM"],
+        "GPIO":7
+    },
+    "LQFP48": {
+        "name":"FM33LC0C8T6",
+        "peripheral": ["ADC","TIM","UART1","UART2","I2C","SPI","PWM"],
+        "GPIO":13
+    },
+    "QFN48": {
+        "name":"FM33LC0C8U6",
+        "peripheral": ["ADC","TIM","UART1","UART2","I2C","SPI","PWM"],
+        "GPIO":18
+    }
+}
